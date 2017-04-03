@@ -1,6 +1,6 @@
 {
     "pages":[
-        "pages/https/https"
+        "pages/session/session"
     ],
     "window":{
         "backgroundTextStyle":"light",

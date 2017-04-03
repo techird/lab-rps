@@ -8,7 +8,12 @@ page, .lab {
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
-} 
+}
+.lab .status image {
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+}
 .lab .hint {
   text-align: center;
 }
