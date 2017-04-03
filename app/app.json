@@ -1,6 +1,6 @@
 {
     "pages":[
-        "pages/session/session"
+        "pages/websocket/websocket"
     ],
     "window":{
         "backgroundTextStyle":"light",

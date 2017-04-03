@@ -23,3 +23,9 @@ page, .lab {
 .lab .interactive input {
   border-bottom: 4rpx solid #EEE;
 }
+.lab .command {
+  display: flex;
+}
+.lab .command button {
+  margin: 10px;
+}
