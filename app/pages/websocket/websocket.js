@@ -1,5 +1,6 @@
 var app = getApp();
 var config = app.config;
+var wafer = require('../../vendors/wafer-client-sdk/index');
 
 Page({
   data: {
@@ -26,8 +27,25 @@ Page({
       hintLine2: '...'
     });
     this.listen();
-    wx.connectSocket({
-      url: this.data.url
+    wafer.setLoginUrl(`https://${config.host}/login`);
+    wafer.login({
+      success: () => {
+        const header = wafer.buildSessionHeader();
+        const query = Object.keys(header).map(key => `${key}=${encodeURIComponent(header[key])}`).join('&');
+        wx.connectSocket({
+          // 小程序 wx.connectSocket() API header 参数无效，把会话信息附加在 URL 上
+          url: `${this.data.url}?${query}`,
+          header
+        });
+      },
+      fail: (err) => {
+        this.setData({
+          status: 'warn',
+          connecting: false,
+          hintLine1: '登录失败',
+          hintLine2: err.message || err
+        });
+      }
     });
   },
 
@@ -54,8 +72,7 @@ Page({
     wx.onSocketClose(() => {
       this.setData({
         status: 'waiting',
-        hintLine1: 'WebSocket 已关闭',
-        hintLine2: '点击连接重新建立 WebSocket 连接'
+        hintLine1: 'WebSocket 已关闭'
       });
       console.info('WebSocket 已关闭');
     });
