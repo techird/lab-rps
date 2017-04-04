@@ -1,6 +1,6 @@
 {
     "pages":[
-        "pages/websocket/websocket"
+        "pages/game/game"
     ],
     "window":{
         "backgroundTextStyle":"light",
